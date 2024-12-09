@@ -54,6 +54,13 @@ public class Board {
     @Column
     private LocalDateTime updateAt;
 
+    //  LAZY는 필요할 때까지 해당 연관된 엔티티를 로딩하지 않는 방식입니다.
+    //  즉, Order 객체가 로딩될 때 Member 객체는 자동으로 로딩되지 않고,
+    //  실제로 member 필드를 참조하려고 할 때 DB에서 조회가 이루어집니다
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "email")
+    private Member member; //주문 회원
+
 //    private Board(){}
 //
 //    public static Builder bulider(){
