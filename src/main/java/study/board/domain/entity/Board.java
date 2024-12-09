@@ -18,48 +18,29 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-@Table(name = "BOARD")
-@Entity
+
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @AllArgsConstructor
-@Data
+@Getter
 public class Board {
 
-    @Id // 엔티티의 기본 키(Primary Key)임을 나타냄
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //기본키가 자동으로 증가하는 방식을 사용한다.
-    @Column(unique = true)
     private Long boardId;
 
-    @Column(nullable = false, length = 100)
     private String title;
 
-    @Column(columnDefinition = "TEXT") //해당 컬럼은 TEXT타입으로 명시, 일반적으로 생성시 varchar(255)
     private String contents;
 
-    @Column(length = 30)
     private String userId;
 
-    @Column(nullable = true, length = 255)
     private String fileName;
 
-    @Column(nullable = false, length = 100)
     private String pwd;
 
-    @CreationTimestamp //엔티티가 처음으로 생성될 때 타임스탬프를 자동으로 설정
-    @Column
     private LocalDateTime createAt;
 
-    @UpdateTimestamp // 엔티티가 업데이트될 때마다 타임스탬프를 자동으로 갱신
-    @Column
     private LocalDateTime updateAt;
 
-    //  LAZY는 필요할 때까지 해당 연관된 엔티티를 로딩하지 않는 방식입니다.
-    //  즉, Order 객체가 로딩될 때 Member 객체는 자동으로 로딩되지 않고,
-    //  실제로 member 필드를 참조하려고 할 때 DB에서 조회가 이루어집니다
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "email")
-    private Member member; //주문 회원
 
 //    private Board(){}
 //
