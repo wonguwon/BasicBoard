@@ -27,21 +27,21 @@ public class Board {
 
     private Long boardId;
 
+    private String memberEmail;
+
     private String title;
 
     private String contents;
 
-    private String userId;
-
     private String fileName;
-
-    private String pwd;
 
     private LocalDateTime createAt;
 
     private LocalDateTime updateAt;
 
-
+    public void changeFileName(String fileName) {
+        this.fileName = fileName;
+    }
 //    private Board(){}
 //
 //    public static Builder bulider(){

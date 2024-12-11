@@ -4,7 +4,13 @@ import study.board.domain.entity.Board;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface BoardMapper {
-    void create(@Param("board") Board board);
+    int save(@Param("board") Board board);
+    List<Board> findAll();
+    Board findOne(@Param("boardId") Long id);
+    int delete(@Param("boardId") Long id);
+    int update(@Param("board") Board board);
 }

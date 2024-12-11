@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import study.board.domain.entity.Board;
 import study.board.mapper.BoardMapper;
 
+import java.util.List;
+
 //Mybatis사용
 @Transactional
 @Service
@@ -14,16 +16,31 @@ public class BoardServiceImpl1 implements BoardService {
     private final BoardMapper boardMapper;
 
     @Override
-    public Boolean create(Board board) throws Exception{
-        try {
-            //Mybatis Mapper사용해서 insert하기
-            boardMapper.create(board);
+    public int save(Board board){
+        //Mybatis Mapper사용해서 insert하기
+        int result = boardMapper.save(board);
 
-        } catch (Exception e){
-            e.printStackTrace();
-            throw new RuntimeException("BoardCreateError");
-        }
+        return result;
+    }
 
-        return true;
+    @Override
+    public List<Board> findAll() {
+        return boardMapper.findAll();
+    }
+
+    @Override
+    public Board findOne(Long boardId) {
+        return boardMapper.findOne(boardId);
+    }
+
+    @Override
+    public int delete(Long boardId) {
+        return boardMapper.delete(boardId);
+    }
+
+    @Override
+    public Long update(Board board) {
+        boardMapper.update(board);
+        return board.getBoardId();
     }
 }

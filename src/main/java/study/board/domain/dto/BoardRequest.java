@@ -1,7 +1,12 @@
 package study.board.domain.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
+import study.board.domain.entity.Board;
+
+import java.time.LocalDateTime;
 
 public class BoardRequest {
 
@@ -9,18 +14,37 @@ public class BoardRequest {
     @Setter
     public static class CreateDTO{
         private String userId;
-        private String pwd;
         private String title;
         private String contents;
+        private String fileName;
+
+        // CreateDTO를 엔티티로 변환
+        public Board toEntity() {
+            return Board.builder()
+                    .memberEmail(userId)
+                    .title(title)
+                    .contents(contents)
+                    .fileName(fileName)
+                    .build();
+        }
     }
 
     @Getter
     @Setter
     public static class UpdateDTO{
-        private String boardId;
-        private String userId;
-        private String pwd;
+        private Long boardId;
         private String title;
         private String contents;
+        private String originFile;
+
+        // CreateDTO를 엔티티로 변환
+        public Board toEntity() {
+            return Board.builder()
+                    .boardId(boardId)
+                    .title(title)
+                    .contents(contents)
+                    .fileName(originFile)
+                    .build();
+        }
     }
 }
